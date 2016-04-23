@@ -2,9 +2,15 @@
 
 class TelaWeb {
   
+    
+  public function telaHome($parametros){
+    echo "<a href=\"?page=PagamentoC.verificaNovaCompra\">Verificar</a>";
+    
+  }
+  
   public function telaDesenhaBoleto($parametros){
-    //desenha pro pdf
-    //envia por ftp
+    print_r($parametros);exit;
+    
   }
 
 }

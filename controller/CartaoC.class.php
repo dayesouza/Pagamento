@@ -2,90 +2,79 @@
 
 class CartaoC {
 
-  public function cadastraCartao() {
-    return array("view" => "telaCadastraCartao");
+  public function buscarCartao(VW_TAB_PAGAMENTO $compra) {
+    //busca cartão na tabela
+    $vw_cartoes = new TAB_PAGAMENTO_CARTOES_DAO();
+    
+    $cartaoObj = $vw_cartoes->buscaCartaoCompra($compra->getId_compra());
+    //Valida os dados do cartão//Não precisa validar pq a tela já faz isso
+//    $verificado = $this->validaCartao($cartaoObj[0]);
+//    if ($verificado){//se deu tudo certo
+    $resultado_pagamento = $this->realizaPagamentoCartao($compra, $cartaoObj);
+    //gravo a log pra vendas o resultado
+    $this->gravaResultadoPagamento($resultado_pagamento);
+    echo "salvo";exit;
+    //envio por ftp
+//    }
+//    else{//se não deu certo, cancelar compra por dados inválidos do cartão
+//    }
   }
 
-  public function cadastrarCartao($parametros) {
-    /* Validações de campos da interface */
-    $data_vencimento = trim($parametros["data_vencimento"]);
-    $bandeira = trim($parametros["bandeira"]);
-    $nome_no_cartao = trim($parametros["nome_no_cartao"]);
-    $apelido_cartao = trim($parametros["apelido_cartao"]);
-    $numero_cartao = trim($parametros["numero_cartao"]);
+  private function realizaPagamentoCartao(VW_TAB_PAGAMENTO $compra, TAB_PAGAMENTO_CARTOES $cartaoObj) {
+    //grava na log
+    $log = new TAB_LOG_PAGAMENTO();
+    $log->setId_compra($compra->getId_compra());
+    $log->setNumero_cartao($cartaoObj->getNumero());
+    $log->setStatus_pagamento("Em andamento");
+    $logDAO = new TAB_LOG_PAGAMENTO_DAO();
+    $logDAO->salvaLogPagCartao($log);
+    
+    //realizo contato para verificar se cartão está disponível
+    //$paga = $this->contatoBandeira($cartaoObj, $compra);
+    $log->setData_pagamento(date('Y-m-d'));
+    $log->setPago('S');
+    $log->setStatus_pagamento("Efetuado");
+    $valor_compra = $compra->getValor_compra() - $compra->getValor_desconto();
+    $valor_parcela = $valor_compra/$compra->getParcelas();
+    $log->setValor_parcela($valor_parcela);
+    $log->setValor_total($valor_compra);
+    $logDAO->atualizaPagamento($log);
+    //pagamento atualizado
+    return $log;
+  }
 
-    /* Envia pro banco de dados */
-    if (isset($parametros["codigo"])) {
-      $retorno_update = $this->editarCartao($parametros);
-      return $retorno_update;
+  private function contatoBandeira(VW_TAB_PAGAMENTO $compra, TAB_PAGAMENTO_CARTOES $cartaoObj) {
+    //busco o contato com a operadora do cartão
+    $tab_bandeira = new TAB_BANDEIRAS_DAO();
+    $objBandeira = $tab_bandeira->buscaInfoBandeira($cartaoObj->getId_bandeira());
+    
+    
+  }
+
+  private function respostaOperadora() {
+    //fazer um script que roda a cada 15 minutos que contacta a 
+    //operadora e verifica se foi aprovado ou não e grava numa tabela
+    //daí volta pra cá
+  }
+  
+  private function gravaResultadoPagamento(TAB_LOG_PAGAMENTO $log){
+    //Grava arquivo com a log do pagamento
+    $texto = $log->getId_compra().";"
+            .$log->getPago().";"
+            .$log->getStatus_pagamento().";"
+            .$log->getNumero_cartao().";"
+            .$log->getValor_parcela().";"
+            .$log->getData_pagamento().";"
+            .$log->getValor_total();
+    //dá pra criar direto no ftp já
+    $name = "/var/www/html/Pagamento/docs/resultadoPagamento.txt";
+    $file = fopen($name, 'a');
+    if ($file == false) {
+      die('Não foi possível criar o arquivo.');
     }
-
-    $cartao_dao = new CartaoDAO();
-    $objetos = $cartao_dao->salvar($data_vencimento, $bandeira, $nome_no_cartao, $apelido_cartao, $numero_cartao);
-
-    return array(
-      "view" => "telaResultadoProcessamentoCartao",
-      "data_vencimento" => $data_vencimento,
-      "bandeira" => $bandeira,
-      "nome_no_cartao" => $nome_no_cartao,
-      "apelido_cartao" => $apelido_cartao,
-      "numero_cartao" => $numero_cartao
-    );
-  }
-
-  /**
-   * 
-   * @param array $parametros
-   * @return array
-   */
-  public function consultarCartoes() {
-    $cartao_dao = new CartaoDAO();
-    $objetos = $cartao_dao->consultar();
-
-    return array("view" => "telaConsultarCartoes", "lista_obj_cartao" => $objetos);
-  }
-
-  public function excluirCartao($parametros) {
-
-    $codigo = $parametros["codigo"];
-
-    $cartao_dao = new CartaoDAO();
-    $objetos = $cartao_dao->excluir($codigo);
-
-    $retorno_consulta = $this->consultarCartoes($parametros);
-
-    return $retorno_consulta;
-    //TODO implementar a exclusão do cartao
-  }
-
-  public function buscarCartao($parametros) {
-    //TODO implementar a edição do cartao
-    $codigo = $parametros["codigo"];
-    
-    $ftpc = new FtpC();
-    $ftpc->recebeArquivoCartoes();
-    
-
-    $cartao_dao = new CartaoDAO();
-    $objetos = $cartao_dao->buscar_especifico($codigo);
-    return array("view" => "telaCadastraCartao", "lista_obj_cartao" => $objetos);
-  }
-
-  public function editarCartao($parametros) {
-    $codigo = $parametros["codigo"];
-    $nome_no_cartao = $parametros["nome_no_cartao"];
-    $data_sql = $parametros["data_vencimento"];
-    $bandeira = $parametros["bandeira"];
-    $apelido_cartao = $parametros["apelido_cartao"];
-    $numero_cartao = $parametros["numero_cartao"];
-
-    $data_vencimento = $this->formataData($data_sql, "Y-m-d");
-    $cartao_dao = new CartaoDAO();
-    $cartao_dao->update($codigo, $data_vencimento, $bandeira, $nome_no_cartao, $apelido_cartao, $numero_cartao);
-
-    $retorno_consulta = $this->consultarCartoes($parametros);
-
-    return $retorno_consulta;
+    fwrite($file, $texto);
+    fclose($file);
+    return true;
   }
 
   private function formataData($data, $formato) {
@@ -101,9 +90,8 @@ class CartaoC {
     }
     return $nova_data;
   }
-  
-  public function validaCartao(){
-    
-  }
 
+//  public function validaCartao(){
+//    
+//  }
 }

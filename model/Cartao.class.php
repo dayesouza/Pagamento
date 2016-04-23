@@ -7,7 +7,6 @@ class Cartao {
   private $data_vencimento;
   private $bandeira;
   private $nome_no_cartao;
-  private $apelido_cartao;
   private $numero_cartao;
   
   function getCodigo() {

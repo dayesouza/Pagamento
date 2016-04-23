@@ -15,30 +15,28 @@ class FtpCom {
 
   private $minha_conexao;
 
-  public function __construct(Ftp $dados_ftp) {
-    $this->conecta($dados_ftp);
-    $this->loga($dados_ftp);
+  public function __construct(FTPConnection $dados_conexao) {
+    $this->conecta($dados_conexao);
+    $this->loga($dados_conexao);
   }
   
-  public function conecta(Ftp $dados_ftp) {
-      $this->minha_conexao = ftp_ssl_connect(
-            $dados_ftp->getEndereco()
-              );
+  public function conecta(FTPConnection $dados_conexao) {
+      $this->minha_conexao = ftp_ssl_connect($dados_conexao->getEndereco());
   }
   
-  public function loga(Ftp $dados_ftp){
-    return ftp_login($this->minha_conexao, $dados_ftp->getUsuario(), $dados_ftp->getSenha()
-            );
+  public function loga(FTPConnection $dados_conexao){
+    return ftp_login($this->minha_conexao, $dados_conexao->getUsuario(), 
+      $dados_conexao->getSenha());
   }
   
-  public function envia(Ftp $dados_ftp){
-    return ftp_put($this->minha_conexao, $dados_ftp->getFtp_pasta().$dados_ftp->getFtp_arquivo(),
-            $dados_ftp->getLocal_arquivo(), FTP_ASCII);
+  public function envia(FTPData $dados_ftp){
+    return ftp_put($this->minha_conexao, $dados_ftp->getFtp_pasta()
+      .$dados_ftp->getFtp_arquivo(), $dados_ftp->getLocal_arquivo(), FTP_ASCII);
   }
   
-  public function recebe(Ftp $dados_ftp){
-    return ftp_get($this->minha_conexao, $dados_ftp->getFtp_pasta().$dados_ftp->getFtp_arquivo(),
-            $dados_ftp->getLocal_arquivo(), FTP_ASCII);
+  public function recebe(FTPData $dados_ftp){
+    return ftp_get($this->minha_conexao, $dados_ftp->getFtp_pasta()
+      .$dados_ftp->getFtp_arquivo(),$dados_ftp->getLocal_arquivo(), FTP_ASCII);
   }
   
   public function fecha_conexao(){

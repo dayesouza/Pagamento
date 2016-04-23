@@ -1,7 +1,7 @@
 <?php
 
 //DAO = Data Access Object
-class CartaoDAO {
+class VW_TAB_LOJA_DAO {
  
   private $nome_tabela;
   /**
@@ -13,22 +13,21 @@ class CartaoDAO {
   private $entidade;
   
   public function __construct() {
-    $this->nome_tabela = "cartoes";
-    $this->entidade = new Cartao();
+    $this->nome_tabela = "VW_TAB_LOJA";
+    $this->entidade = new VW_TAB_LOJA();
     //Instancia o banco de dados. 
     $this->conexao = new BancoDeDados();
     $this->conexao->conecta();
   }
   
-  
-  public function consultar() {    
-    $sql = "select * from ".$this->nome_tabela ." order by codigo";    
-    $registros = $this->conexao->executaQuery($sql, $this->entidade);    
-    return $registros;    
-  }
-  
-  public function consultarBoletosPagos() {
-    
+  /**
+   * Busca o maior código da tabela
+   * @return object
+   */
+  public function buscarUltimoCodigo() {    
+    $sql = "select MAX(cnpj) from ".$this->nome_tabela;    
+    $registro = $this->conexao->executaQuery($sql);    
+    return $registro;    
   }
   
   public function buscar_especifico($codigo) {
