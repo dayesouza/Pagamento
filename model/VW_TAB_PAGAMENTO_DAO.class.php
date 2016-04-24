@@ -36,7 +36,10 @@ class VW_TAB_PAGAMENTO_DAO {
     return $registro;  
   }
   public function buscarApartirDe($codigo){
-    
+    $sql = "select * from " . $this->nome_tabela .
+            " where id_compra >" . $codigo;
+    $registros = $this->conexao->executaQuery($sql, $this->entidade);
+    return $registros;
   }
   
   

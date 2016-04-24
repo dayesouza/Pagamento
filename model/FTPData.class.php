@@ -37,13 +37,13 @@ class FTPData {
     return $this->ftp_arquivo;
   }
 
-  function setLocal_arquivo(String $local_arquivo) {
+  function setLocal_arquivo($local_arquivo) {
     $this->local_arquivo = $local_arquivo;
   }
-  function setFtp_pasta(String $ftp_pasta) {
+  function setFtp_pasta($ftp_pasta) {
     $this->ftp_pasta = $ftp_pasta;
   }
-  function setFtp_arquivo(String $ftp_arquivo) {
+  function setFtp_arquivo($ftp_arquivo) {
     $this->ftp_arquivo = $ftp_arquivo;
   }
 }

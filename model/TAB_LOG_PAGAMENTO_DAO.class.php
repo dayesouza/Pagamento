@@ -30,14 +30,6 @@ class TAB_LOG_PAGAMENTO_DAO {
     return $registro;
   }
 
-  public function buscar_especifico($codigo) {
-
-    $sql = "select * from " . $this->nome_tabela .
-            " where codigo=" . $codigo;
-    $registros = $this->conexao->executaQuery($sql, $this->entidade);
-    return $registros;
-  }
-
   public function update($codigo, $data_vencimento, $bandeira, $nome_no_cartao, $apelido_cartao, $numero_cartao) {
     $sql = "update " . $this->nome_tabela .
             " set NOME_NO_CARTAO='" . $nome_no_cartao . "',DATA_VENCIMENTO='" . $data_vencimento .

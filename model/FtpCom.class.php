@@ -15,9 +15,16 @@ class FtpCom {
 
   private $minha_conexao;
 
-  public function __construct(FTPConnection $dados_conexao) {
-    $this->conecta($dados_conexao);
-    $this->loga($dados_conexao);
+  public function __construct() {
+    $ftpcon = new FTPConnection();
+    $ftpcon->setEndereco("192.168.0.19");
+    $ftpcon->setPorta(21);
+    $ftpcon->setUsuario("vendas");
+    $ftpcon->setSenha("venda01");
+    
+    $this->conecta($ftpcon);
+    $this->loga($ftpcon);
+    ftp_pasv($this->minha_conexao, TRUE);
   }
   
   public function conecta(FTPConnection $dados_conexao) {
@@ -31,7 +38,7 @@ class FtpCom {
   
   public function envia(FTPData $dados_ftp){
     return ftp_put($this->minha_conexao, $dados_ftp->getFtp_pasta()
-      .$dados_ftp->getFtp_arquivo(), $dados_ftp->getLocal_arquivo(), FTP_ASCII);
+      .$dados_ftp->getFtp_arquivo(), $dados_ftp->getLocal_arquivo(), FTP_BINARY);
   }
   
   public function recebe(FTPData $dados_ftp){
