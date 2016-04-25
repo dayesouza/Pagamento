@@ -34,7 +34,7 @@ class VW_CLIENTE_DAO {
    */
   public function buscarCliente($id_cliente) {
     $sql = "select * from " . $this->nome_tabela." where id=".$id_cliente;
-    $registro = $this->conexao->executaQuery($sql,$this->entidade);
-    return $registro[0];
+    $registro = $this->conexao->executaQuery($sql);
+    return $registro;
   }
 }

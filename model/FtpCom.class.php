@@ -27,7 +27,7 @@ class FtpCom {
     ftp_pasv($this->minha_conexao, TRUE);
   }
   
-  public function conecta(FTPConnection $dados_conexao) {
+  public function conecta(FTPConnection $dados_conexao){
       $this->minha_conexao = ftp_ssl_connect($dados_conexao->getEndereco());
   }
   
@@ -43,7 +43,13 @@ class FtpCom {
   
   public function recebe(FTPData $dados_ftp){
     return ftp_get($this->minha_conexao, $dados_ftp->getFtp_pasta()
-      .$dados_ftp->getFtp_arquivo(),$dados_ftp->getLocal_arquivo(), FTP_ASCII);
+      .$dados_ftp->getFtp_arquivo(),$dados_ftp->getLocal_arquivo(), FTP_BINARY);
+  }
+  
+  public function exclui(FTPData $dados_ftp){
+    //exclui o arquivo já lido e salvo
+    ftp_delete($this->minha_conexao, $dados_ftp->getFtp_pasta()
+      .$dados_ftp->getFtp_arquivo());
   }
   
   public function fecha_conexao(){

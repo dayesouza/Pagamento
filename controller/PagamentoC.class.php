@@ -15,9 +15,11 @@ class PagamentoC {
 
     //se for nulo não existem logs, buscar todos os registros de compra
     if ($ultimo_codigo[0] == null) {
-      //busca todas as compras
-      $compras = $vw_pagamentoDAO->buscarTodos();
+      //busca todas as compras no ftp
+      //   $compras = $vw_pagamentoDAO->buscarTodos();
 
+      //se achou, grava no banco as compras novas
+      
       //Se for diferente de null, é porque existe compra
       if ($compras != null) {//Para cada compra encontrada, ir para o tipo de pagamento
         foreach ($compras as $compra) {

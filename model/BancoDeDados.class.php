@@ -4,10 +4,18 @@ class BancoDeDados {
 
   private $my_conexao;
 
-  public function conecta() {
-    $this->my_conexao = mysqli_connect(
-            "localhost", "root", "admcpd", "pagamentos"
-    );
+public function conecta($conexao = null) {
+    if ($conexao != null){
+      $this->my_conexao = mysqli_connect(
+        $conexao["host"], $conexao["user"], $conexao["senha"], $conexao["database"]
+      );
+      echo "ta";exit;
+    }
+    else{
+      $this->my_conexao = mysqli_connect(
+              "localhost", "root", "admcpd", "pagamentos"
+      );
+    }
   }
 
   public function desconecta() {
