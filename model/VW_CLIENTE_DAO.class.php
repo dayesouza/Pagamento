@@ -7,34 +7,34 @@
  */
 
 /**
- * Description of TAB_BANDEIRAS_DAO
+ * Description of VW_CLIENTE_DAO
  *
  * @author day
  */
-class TAB_BANDEIRAS_DAO {
+class VW_CLIENTE_DAO {
   private $nome_tabela;
   /**
-   *d
+   * d
    * @var BancoDeDados
    */
   private $conexao;
-  
   private $entidade;
-  
+
   public function __construct() {
-    $this->nome_tabela = "TAB_BANDEIRAS";
-    $this->entidade = new TAB_BANDEIRAS();
+    $this->nome_tabela = "VW_CLIENTE";
+    $this->entidade = new VW_CLIENTE();
     //Instancia o banco de dados. 
     $this->conexao = new BancoDeDados();
     $this->conexao->conecta();
   }
-  
+
   /**
+   * Busca o maior código da tabela
    * @return object
    */
-  public function buscaInfoBandeira($cod_bandeira) {    
-    $sql = "select * from ".$this->nome_tabela." where id=".$cod_bandeira;    
-    $registro = $this->conexao->executaQuery($sql,$this->entidade);    
-    return $registro;    
+  public function buscarCliente($id_cliente) {
+    $sql = "select * from " . $this->nome_tabela." where id=".$id_cliente;
+    $registro = $this->conexao->executaQuery($sql,$this->entidade);
+    return $registro[0];
   }
 }

@@ -15,6 +15,7 @@ class VW_CLIENTE {
   private $id;
   private $endereco;
   private $cpf;
+  private $nome;
   
   function getId() {
     return $this->id;
@@ -24,8 +25,12 @@ class VW_CLIENTE {
     return $this->endereco;
   }
 
-  function getCpd() {
+  function getCpf() {
     return $this->cpf;
+  }
+  
+  function getNome() {
+    return $this->nome;
   }
 
   function setId($id) {
@@ -36,9 +41,11 @@ class VW_CLIENTE {
     $this->endereco = $endereco;
   }
 
-  function setCpd($cpd) {
+  function setCpf($cpd) {
     $this->cpf = $cpd;
   }
 
-
+  function setNome($nome) {
+    $this->nome = $nome;
+  }
 }

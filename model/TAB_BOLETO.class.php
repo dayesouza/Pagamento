@@ -24,7 +24,7 @@ class TAB_BOLETO {
   
   private $cnpj_loja;
   
-  private $id_compra;
+  private $numero_documento;
   
   private $id_tipo_pagamento;
   
@@ -33,6 +33,8 @@ class TAB_BOLETO {
   private $data_vencimento;
   
   private $cod_barras;
+  
+  private $valor_boleto;
   
   function getId() {
     return $this->id;
@@ -50,8 +52,8 @@ class TAB_BOLETO {
     return $this->cnpj_loja;
   }
 
-  function getId_compra() {
-    return $this->id_compra;
+  function getNumero_documento() {
+    return $this->numero_documento;
   }
 
   function getId_tipo_pagamento() {
@@ -68,6 +70,10 @@ class TAB_BOLETO {
 
   function getCod_barras() {
     return $this->cod_barras;
+  }
+  
+  function getValor_boleto() {
+    return $this->valor_boleto;
   }
 
   function setId($id) {
@@ -86,8 +92,8 @@ class TAB_BOLETO {
     $this->cnpj_loja = $cnpj_loja;
   }
 
-  function setId_compra($id_compra) {
-    $this->id_compra = $id_compra;
+  function setNumero_documento($numero_documento) {
+    $this->numero_documento = $numero_documento;
   }
 
   function setId_tipo_pagamento($id_tipo_pagamento) {
@@ -106,7 +112,7 @@ class TAB_BOLETO {
     $this->cod_barras = $cod_barras;
   }
 
-
-  
-  
+  function setValor_boleto($valor_boleto) {
+    $this->valor_boleto = $valor_boleto;
+  }
 }

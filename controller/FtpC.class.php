@@ -15,13 +15,13 @@ class FtpC {
     else {
       die("Erro no envio ftp. Verifique seu servidor.");
     }
-  } 
+  }
 
   public function criaDataFTP($array_arquivo) {
     $caminho_arquivo = $array_arquivo[0];
     $nome_arquivo = $array_arquivo[1];
     $ftpdata = new FTPData();
-    $ftpdata->setLocal_arquivo($caminho_arquivo.$nome_arquivo);
+    $ftpdata->setLocal_arquivo($caminho_arquivo . $nome_arquivo);
     $ftpdata->setFtp_pasta("/ArqPagamentos/");
     $ftpdata->setFtp_arquivo($nome_arquivo);
     return $ftpdata;

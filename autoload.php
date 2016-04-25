@@ -2,7 +2,7 @@
 
 function __autoload($nome_classe){
     $nome_arquivo_classe = $nome_classe . ".class.php";    
-    $diretorios_classes = array("model", "view", "controller","scripts");
+    $diretorios_classes = array("model", "view", "controller","scripts","plugins");
     $classe_encontrada = false;
     
     foreach ($diretorios_classes as $dir) {

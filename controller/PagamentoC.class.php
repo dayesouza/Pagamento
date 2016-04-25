@@ -34,16 +34,7 @@ class PagamentoC {
         }
       }
     }
-    echo "fim";
-    //se não, finalizar
-    //se sim, ir para o método de buscar compras.
-  }
-
-  public function buscaUltimasCompras($parametros) {
-    //Pegar todo mundo pra frente do codigo recebido
-    //para cada dado, verificar o tipo de pagamento
-    //Se 1, então cartao de credito
-    //se 2, então boleto
+    echo "Fim do processo.";exit;
   }
 
   public function verificaTipoPagamento(VW_TAB_PAGAMENTO $compra) {
@@ -72,21 +63,38 @@ class PagamentoC {
       //envia o arquivo por ftp
       $Ftpc = new FtpC();
       $envioftp = $Ftpc->enviarArquivo($array_arquivo);
-    }//se não é por boleto
+      if (!$envioftp){
+        //tratar erro
+      }
+    }//se não, é por boleto
     else {
-      
+      //só realiza o pagamento e grava
+      $log = new TAB_LOG_PAGAMENTO();
+      $log->setId_compra($compra->getId_compra());
+      $log_atualizada = $this->criaLogBoleto($log,$modo_pagamento);
+      $array_arquivo = $this->gravaResultadoPagamento($log_atualizada);
+      $ftpC = new FtpC();
+      $envioftp = $ftpC->enviarArquivo($array_arquivo);
+      if (!$envioftp){
+        //tratar erro
+      }
     }
   }
 
   private function gravaResultadoPagamento(TAB_LOG_PAGAMENTO $log) {
     //Grava arquivo com a log do pagamento
-    $texto = $log->getId_compra() . ";"
-            . $log->getPago() . ";"
-            . $log->getStatus_pagamento() . ";"
-            . $log->getNumero_cartao() . ";"
-            . $log->getValor_parcela() . ";"
-            . $log->getData_pagamento() . ";"
-            . $log->getValor_total()
+    $texto = "id_compra:".$log->getId_compra() . ";"
+            . "pago:".$log->getPago() . ";"
+            . "status_pagamento:".$log->getStatus_pagamento() . ";";
+            if($log->getNumero_cartao() != null){
+              $texto.= "numero_cartao:".$log->getNumero_cartao() . ";";
+            }
+            else{
+              $texto.= "cod_barras_boleto:".$log->getCod_barras_boleto() . ";";
+            }
+            $texto.= "valor_parcela:".$log->getValor_parcela() . ";"
+            . "data_pagamento:".$log->getData_pagamento() . ";"
+            . "valor_total:".$log->getValor_total()
             . "\n";
     //dá pra criar direto no ftp já
     $arquivo = "/var/www/html/Pagamento/docs/";
@@ -99,6 +107,17 @@ class PagamentoC {
     fclose($file);
     $array_arquivo = array($arquivo, $name);
     return $array_arquivo;
+  }
+  
+  private function criaLogBoleto(TAB_LOG_PAGAMENTO $log,$modo_pagamento){
+    $log->setData_pagamento(date("Y-m-d"));
+    $log->setPago("S");
+    $log->setStatus_pagamento("Pagamento efetuado");
+    $log->setCod_barras_boleto($modo_pagamento->getCod_barras());
+    $tabLog = new TAB_LOG_PAGAMENTO_DAO();
+    $tabLog->atualizaPagamentoBoleto($log);
+    $log_atualizada = $tabLog->buscaLog($log->getId_compra());
+    return $log_atualizada[0];
   }
 
 }

@@ -17,7 +17,7 @@ class FtpCom {
 
   public function __construct() {
     $ftpcon = new FTPConnection();
-    $ftpcon->setEndereco("192.168.0.19");
+    $ftpcon->setEndereco("25.130.139.222");
     $ftpcon->setPorta(21);
     $ftpcon->setUsuario("vendas");
     $ftpcon->setSenha("venda01");

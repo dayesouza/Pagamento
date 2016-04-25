@@ -15,12 +15,13 @@ class BancoDeDados {
   }
 
   public function executaQuery($texto_query, $objeto = null) {
-
     $nome_classe = get_class($objeto);
 
     $rs = mysqli_query($this->my_conexao, $texto_query);
     $lista_objetos = array();
-
+    if (!($rs instanceof mysqli_result)){
+      return $rs;
+    }
     while ($registro = mysqli_fetch_assoc($rs)) {
       if ($objeto == null) {
         $obj = $registro[key($registro)];
@@ -45,10 +46,10 @@ class BancoDeDados {
   public function atualizaTabela($texto_query) {
     $rs = mysqli_query($this->my_conexao, $texto_query);
     if ($rs > 0) {
-      return true;
+      return $rs;
     }
     else {
-      return false;
+      return $rs;
     }
   }
 

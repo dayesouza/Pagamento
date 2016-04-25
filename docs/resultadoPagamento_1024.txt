@@ -1,0 +1,22 @@
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+1024;N;Pagamento não realizado. Verifique junto a sua operadora.;15649234047834594;61.945;2016-04-24;123.89
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+1024;N;Pagamento não realizado. Verifique junto a sua operadora.;15649234047834594;61.945;2016-04-24;123.89
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+1024;S;Pagamento efetuado;15649234047834594;61.945;2016-04-24;123.89
+id_compra:1024;pago:S;status_pagamento:Pagamento efetuado;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-24;valor_total:123.89
+id_compra:1024;pago:S;status_pagamento:Pagamento efetuado;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-24;valor_total:123.89
+id_compra:1024;pago:S;status_pagamento:Pagamento efetuado;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-24;valor_total:123.89
+id_compra:1024;pago:S;status_pagamento:Pagamento efetuado;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-24;valor_total:123.89
+id_compra:1024;pago:S;status_pagamento:Pagamento efetuado;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-24;valor_total:123.89
+id_compra:1024;pago:N;status_pagamento:Pagamento não realizado. Verifique junto a sua operadora.;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-24;valor_total:123.89
+id_compra:1024;pago:S;status_pagamento:Pagamento efetuado;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-24;valor_total:123.89
+id_compra:1024;pago:N;status_pagamento:Pagamento não realizado. Verifique junto a sua operadora.;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-24;valor_total:123.89
+id_compra:1024;pago:S;status_pagamento:Pagamento efetuado;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-25;valor_total:123.89
+id_compra:1024;pago:N;status_pagamento:Pagamento não realizado. Verifique junto a sua operadora.;numero_cartao:15649234047834594;valor_parcela:61.945;data_pagamento:2016-04-25;valor_total:123.89

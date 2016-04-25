@@ -24,10 +24,10 @@ class VW_TAB_LOJA_DAO {
    * Busca o maior código da tabela
    * @return object
    */
-  public function buscarUltimoCodigo() {    
-    $sql = "select MAX(cnpj) from ".$this->nome_tabela;    
-    $registro = $this->conexao->executaQuery($sql);    
-    return $registro;    
+  public function buscarInfoLoja() {    
+    $sql = "select * from ".$this->nome_tabela;    
+    $registro = $this->conexao->executaQuery($sql,$this->entidade);    
+    return $registro[0];    
   }
   
   public function buscar_especifico($codigo) {

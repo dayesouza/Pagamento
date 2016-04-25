@@ -29,6 +29,12 @@ class TAB_LOG_PAGAMENTO_DAO {
     $registro = $this->conexao->executaQuery($sql);
     return $registro;
   }
+  
+  public function buscaLog($codigo){
+    $sql = "select * from " . $this->nome_tabela." where id_compra=".$codigo;
+    $registro = $this->conexao->executaQuery($sql,$this->entidade);
+    return $registro;
+  }
 
   public function update($codigo, $data_vencimento, $bandeira, $nome_no_cartao, $apelido_cartao, $numero_cartao) {
     $sql = "update " . $this->nome_tabela .
@@ -40,8 +46,16 @@ class TAB_LOG_PAGAMENTO_DAO {
 
   public function salvaLogPagCartao($log) {
     $sql = 'insert into ' . $this->nome_tabela . " (ID_COMPRA,STATUS_PAGAMENTO,NUMERO_CARTAO)"
-      ."values (" . $log->getId_compra() . ",'"
+      ." values (" . $log->getId_compra() . ",'"
       .$log->getStatus_pagamento() . "'," . $log->getNumero_cartao() . ")";
+    $this->conexao->atualizaTabela($sql);
+    return true;
+  }
+    public function salvaLogPagBoleto($log) {
+    $sql = 'insert into ' . $this->nome_tabela . " (ID_COMPRA,STATUS_PAGAMENTO,COD_BARRAS_BOLETO,VALOR_PARCELA,VALOR_TOTAL)"
+      ." values (".$log->getId_compra().",'"
+      .$log->getStatus_pagamento()."','".$log->getCod_barras_boleto()."'"
+            . ",".$log->getValor_parcela().",".$log->getValor_total().")";
     $this->conexao->atualizaTabela($sql);
     return true;
   }
@@ -55,7 +69,18 @@ class TAB_LOG_PAGAMENTO_DAO {
        ."',VALOR_TOTAL=".$log->getValor_total()
       ." where ID_COMPRA= ".$log->getId_compra()
       ." and NUMERO_CARTAO=".$log->getNumero_cartao();
-    $update = $this->conexao->atualizaTabela($sql);
+    $this->conexao->atualizaTabela($sql);
+
+    return true;
+  }
+  
+    public function atualizaPagamentoBoleto($log){
+    $sql = 'update ' . $this->nome_tabela . " set"
+      ." STATUS_PAGAMENTO= '".$log->getStatus_pagamento()
+      ."', PAGO='".$log->getPago()
+      ."', DATA_PAGAMENTO='".$log->getData_pagamento()
+      ."' where ID_COMPRA=".$log->getId_compra();
+    $this->conexao->atualizaTabela($sql);
 
     return true;
   }

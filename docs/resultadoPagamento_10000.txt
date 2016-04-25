@@ -1,0 +1,2 @@
+id_compra:10000;pago:S;status_pagamento:Efetuado;cod_barras_boleto:34191.31754 88887.653728 92823.897704 1 3316400000;valor_parcela:13;data_pagamento:2016-04-24;valor_total:13
+id_compra:10000;pago:S;status_pagamento:Efetuado;cod_barras_boleto:34191.31754 88887.653728 92823.897704 9 3681640000;valor_parcela:13;data_pagamento:2016-04-25;valor_total:13
