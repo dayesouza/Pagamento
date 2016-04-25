@@ -46,6 +46,10 @@ class FtpCom {
       .$dados_ftp->getFtp_arquivo(),$dados_ftp->getLocal_arquivo(), FTP_BINARY);
   }
   
+  public function lista(FTPData $dados_ftp){
+    return ftp_nlist($this->minha_conexao, $dados_ftp->getFtp_pasta());
+  }
+  
   public function exclui(FTPData $dados_ftp){
     //exclui o arquivo já lido e salvo
     ftp_delete($this->minha_conexao, $dados_ftp->getFtp_pasta()

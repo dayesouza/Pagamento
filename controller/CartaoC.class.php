@@ -5,7 +5,6 @@ class CartaoC {
   public function buscarCartao(VW_TAB_PAGAMENTO $compra) {
     //busca cartão na tabela
     $vw_cartoes = new TAB_PAGAMENTO_CARTOES_DAO();
-    
     $cartaoObj = $vw_cartoes->buscaCartaoCompra($compra->getId_compra());
     return $cartaoObj;
   }

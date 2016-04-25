@@ -16,6 +16,12 @@ class FtpC {
       die("Erro no envio ftp. Verifique seu servidor.");
     }
   }
+  //busca arquivos no diretório FTP
+  public function listaArquivos($ftpdata){
+    $ftpCom = new FtpCom();
+    $array_arquivos = $ftpCom->lista($ftpdata);
+    return $array_arquivos;
+  }
 
   public function criaDataFTP($array_arquivo) {
     $caminho_arquivo = $array_arquivo[0];

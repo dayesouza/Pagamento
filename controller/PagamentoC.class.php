@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Description of PagamentoC
  *
@@ -8,38 +7,27 @@
 class PagamentoC {
 
   public function verificaNovaCompra() {
-    $vw_pagamentoDAO = new VW_TAB_PAGAMENTO_DAO();
-    //vai na tab_log_pagamento
-    $logPagamentoDAO = new TAB_LOG_PAGAMENTO_DAO();
-    $ultimo_codigo = $logPagamentoDAO->buscarUltimoCodigo();
+    //Verifica se tem arquivos novos com informacoes da compra
+    $ftpc = new FtpC();
+    $ftpdata = new FTPData();
+    $ftpdata->setFtp_pasta("/ArqPagamentos/");
+    $arquivos = $ftpc->listaArquivos($ftpdata);
+    print_r($arquivos);exit;
 
-    //se for nulo não existem logs, buscar todos os registros de compra
-    if ($ultimo_codigo[0] == null) {
-      //busca todas as compras no ftp
-      //   $compras = $vw_pagamentoDAO->buscarTodos();
-
-      //se achou, grava no banco as compras novas
-      
-      //Se for diferente de null, é porque existe compra
-      if ($compras != null) {//Para cada compra encontrada, ir para o tipo de pagamento
-        foreach ($compras as $compra) {
-          $this->verificaTipoPagamento($compra);
-        }
-      }
-    }//se não, pega esse ultimo id
-    else {
-      //procura na view tab_pagamento se tem alguma compra dps desse id
-      $proximos_codigos = $vw_pagamentoDAO->buscarApartirDe($ultimo_codigo[0]);
-      if ($proximos_codigos != null) {
-        foreach ($proximos_codigos as $proxima_compra) {
-          $this->verificaTipoPagamento($proxima_compra);
-        }
+    //se existir arquivos; já ta em obj?
+    if($arquivos != null){
+      foreach ($arquivos as $compra) {
+        //gravo em tabela
+        //
+        //retorno o objeto
+        //Verifico o tipo do pagamento com o objeto compra
+        $this->verificaTipoPagamento($compraObj);
       }
     }
     echo "Fim do processo.";exit;
   }
 
-  public function verificaTipoPagamento(VW_TAB_PAGAMENTO $compra) {
+  private function verificaTipoPagamento(VW_TAB_PAGAMENTO $compra) {
     $tipo_pagamento = $compra->getTipo_pagamento();
     switch ($tipo_pagamento) {
       case 1://Se for 1, é cartao de credito
