@@ -34,9 +34,10 @@ class TAB_BOLETO_DAO {
    * @return object
    */
   public function gravaInfoBoleto(TAB_BOLETO $obj_boleto) {
-    $sql = "insert into " . $this->nome_tabela . "(id_info_banco, id_cliente, "
+    $sql = "insert into " . $this->nome_tabela . "(id,id_info_banco, id_cliente, "
             . "cnpj_loja, numero_documento, data_processamento, data_vencimento, cod_barras,"
-            . " id_tipo_pagamento, valor_boleto) values (". $obj_boleto->getId_info_banco()
+            . " id_tipo_pagamento, valor_boleto) values (".$obj_boleto->getNumero_documento()
+            .",".$obj_boleto->getId_info_banco()
             .", ".$obj_boleto->getId_cliente().",".$obj_boleto->getCnpj_loja()
             .",".$obj_boleto->getNumero_documento().",'".$obj_boleto->getData_processamento()
             ."','".$obj_boleto->getData_vencimento()."','".$obj_boleto->getCod_barras()

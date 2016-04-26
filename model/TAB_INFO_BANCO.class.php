@@ -13,7 +13,17 @@ class TAB_INFO_BANCO {
   private $carteira;
   private $nome;
   private $nosso_numero;
+  private $cnpj_loja;
   
+  
+  function getCnpj_loja() {
+    return $this->cnpj_loja;
+  }
+
+  function setCnpj_loja($cnpj_loja) {
+    $this->cnpj_loja = $cnpj_loja;
+  }
+
   function getId() {
     return $this->id;
   }

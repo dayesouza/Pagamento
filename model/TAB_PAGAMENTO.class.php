@@ -1,10 +1,10 @@
 <?php
 /**
- * Description of VW_TAB_PAGAMENTO
+ * Description of TAB_PAGAMENTO
  *
  * @author day
  */
-class VW_TAB_PAGAMENTO {
+class TAB_PAGAMENTO {
   private $id_compra;
   private $id_cliente;
   private $tipo_pagamento;

@@ -7,45 +7,48 @@
  */
 
 /**
- * Description of VW_CLIENTE
+ * Description of TAB_CLIENTE
  *
  * @author day
  */
-class VW_CLIENTE {
+class TAB_CLIENTE {
+  
   private $id;
-  private $endereco;
   private $cpf;
   private $nome;
+  private $endereco;
   
   function getId() {
     return $this->id;
+  }
+
+  function getCpf() {
+    return $this->cpf;
+  }
+
+  function getNome() {
+    return $this->nome;
   }
 
   function getEndereco() {
     return $this->endereco;
   }
 
-  function getCpf() {
-    return $this->cpf;
-  }
-  
-  function getNome() {
-    return $this->nome;
-  }
-
   function setId($id) {
     $this->id = $id;
+  }
+
+  function setCpf($cpf) {
+    $this->cpf = $cpf;
+  }
+
+  function setNome($nome) {
+    $this->nome = $nome;
   }
 
   function setEndereco($endereco) {
     $this->endereco = $endereco;
   }
 
-  function setCpf($cpd) {
-    $this->cpf = $cpd;
-  }
 
-  function setNome($nome) {
-    $this->nome = $nome;
-  }
 }

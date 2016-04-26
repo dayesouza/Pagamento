@@ -42,8 +42,8 @@ class FtpCom {
   }
   
   public function recebe(FTPData $dados_ftp){
-    return ftp_get($this->minha_conexao, $dados_ftp->getFtp_pasta()
-      .$dados_ftp->getFtp_arquivo(),$dados_ftp->getLocal_arquivo(), FTP_BINARY);
+    return ftp_get($this->minha_conexao, $dados_ftp->getLocal_arquivo(),
+            $dados_ftp->getFtp_pasta().$dados_ftp->getFtp_arquivo(), FTP_BINARY);
   }
   
   public function lista(FTPData $dados_ftp){

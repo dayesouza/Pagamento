@@ -1,7 +1,7 @@
 <?php
 
 //DAO = Data Access Object
-class VW_TAB_LOJA_DAO {
+class TAB_LOJA_DAO {
  
   private $nome_tabela;
   /**
@@ -13,8 +13,8 @@ class VW_TAB_LOJA_DAO {
   private $entidade;
   
   public function __construct() {
-    $this->nome_tabela = "VW_TAB_LOJA";
-    $this->entidade = new VW_TAB_LOJA();
+    $this->nome_tabela = "TAB_LOJA";
+    $this->entidade = new TAB_LOJA();
     //Instancia o banco de dados. 
     $this->conexao = new BancoDeDados();
     $this->conexao->conecta();

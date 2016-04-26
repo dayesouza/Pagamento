@@ -7,9 +7,9 @@
  */
 class BoletoC {
 
-  public function criaInfoBoleto(VW_TAB_PAGAMENTO $compra) {
+  public function criaInfoBoleto(TAB_PAGAMENTO $compra) {
     //busca informacoes da loja
-    $vwLoja = new VW_TAB_LOJA_DAO();
+    $vwLoja = new TAB_LOJA_DAO();
     $objLoja = $vwLoja->buscarInfoLoja();
 
     //Busca as informacoes do banco
@@ -17,8 +17,8 @@ class BoletoC {
     $objBanco = $infoBanco->buscarInfoBanco();
 
     //pega informacoes do cliente
-    $infoCliente = new VW_CLIENTE_DAO();
-    $objCliente = $infoCliente->buscarCliente($compra->getId_cliente());
+    $infoCliente = new TAB_CLIENTE_DAO();
+    $objCliente = $infoCliente->buscarInfoCliente($compra->getId_cliente());
     $objBoleto = new TAB_BOLETO();
 
     $dias_de_prazo_para_pagamento = 5;
@@ -68,7 +68,7 @@ class BoletoC {
     return $objBoleto;
   }
   
-  public function gravaLogBoleto(VW_TAB_PAGAMENTO $compra, $dados_pagamento_boleto, TAB_BOLETO $objBoleto){
+  public function gravaLogBoleto(TAB_PAGAMENTO $compra, $dados_pagamento_boleto, TAB_BOLETO $objBoleto){
     $log = new TAB_LOG_PAGAMENTO();
     $log->setCod_barras_boleto($dados_pagamento_boleto["linha_digitavel"]);
     $log->setId_compra($compra->getId_compra());

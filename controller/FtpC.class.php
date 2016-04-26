@@ -16,6 +16,12 @@ class FtpC {
       die("Erro no envio ftp. Verifique seu servidor.");
     }
   }
+  
+  public function baixaArquivo($ftpdata){
+    $ftpCom = new FtpCom();
+    $array_arquivos = $ftpCom->recebe($ftpdata);
+    return $array_arquivos;
+  }
   //busca arquivos no diretório FTP
   public function listaArquivos($ftpdata){
     $ftpCom = new FtpCom();
@@ -31,6 +37,11 @@ class FtpC {
     $ftpdata->setFtp_pasta("/ArqPagamentos/");
     $ftpdata->setFtp_arquivo($nome_arquivo);
     return $ftpdata;
+  }
+  public function excluiArquivo($dados_ftp){
+    $ftpCom = new FtpCom();
+    $ftpCom->exclui($dados_ftp);
+    return true;
   }
 
 }

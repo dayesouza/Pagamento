@@ -2,14 +2,14 @@
 
 class CartaoC {
 
-  public function buscarCartao(VW_TAB_PAGAMENTO $compra) {
+  public function buscarCartao(TAB_PAGAMENTO $compra) {
     //busca cartão na tabela
     $vw_cartoes = new TAB_PAGAMENTO_CARTOES_DAO();
     $cartaoObj = $vw_cartoes->buscaCartaoCompra($compra->getId_compra());
     return $cartaoObj;
   }
 
-  public function realizaPagamentoCartao(VW_TAB_PAGAMENTO $compra, TAB_PAGAMENTO_CARTOES $cartaoObj) {
+  public function realizaPagamentoCartao(TAB_PAGAMENTO $compra, TAB_PAGAMENTO_CARTOES $cartaoObj) {
     //grava na log
     $log = new TAB_LOG_PAGAMENTO();
     $log->setId_compra($compra->getId_compra());
@@ -48,20 +48,6 @@ class CartaoC {
     else{
       return true;
     }
-  }
-  
-  private function formataData($data, $formato) {
-    $data_timestamp = strtotime($data);
-
-    switch ($formato) {
-      case 'Y-m-d':
-        $nova_data = date("Y-m-d");
-        break;
-      case'd-m-Y':
-        $nova_data = date('d-m-Y', $data_timestamp);
-        break;
-    }
-    return $nova_data;
   }
 
 //  public function validaCartao(){

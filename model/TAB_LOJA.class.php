@@ -1,10 +1,10 @@
 <?php
 /**
- * Description of VW_TAB_LOJA
+ * Description of TAB_LOJA
  *
  * @author day
  */
-class VW_TAB_LOJA {
+class TAB_LOJA {
   
   private $cnpj;
   private $nome;
