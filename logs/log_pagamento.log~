@@ -1,0 +1,12 @@
+model/PagamentoC.class.phpview/PagamentoC.class.phpcontroller/PagamentoC.class.phpscripts/PagamentoC.class.phpplugins/PagamentoC.class.php
+Fatal error: Uncaught exception 'Exception' with message 'Classe PagamentoC não encontrada.' in /var/www/html/Pagamento/autoload.php:20
+Stack trace:
+#0 /var/www/html/Pagamento/index_pay.php(6): __autoload('PagamentoC')
+#1 {main}
+  thrown in /var/www/html/Pagamento/autoload.php on line 20
+model/PagamentoC.class.phpview/PagamentoC.class.phpcontroller/PagamentoC.class.phpscripts/PagamentoC.class.phpplugins/PagamentoC.class.php
+Fatal error: Uncaught exception 'Exception' with message 'Classe PagamentoC não encontrada.' in /var/www/html/Pagamento/autoload.php:20
+Stack trace:
+#0 /var/www/html/Pagamento/index_pay.php(6): __autoload('PagamentoC')
+#1 {main}
+  thrown in /var/www/html/Pagamento/autoload.php on line 20

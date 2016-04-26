@@ -41,9 +41,10 @@ class PagamentoC {
       $ftpc->excluiArquivo($ftpdata);
       }
     }
-    $parametros["view"]= "telaHome";
-    $parametros["msg"]="Processo finalizado.";
-    return $parametros;
+    exit;
+//    $parametros["view"]= "telaHome";
+//    $parametros["msg"]="Processo finalizado.";
+//    return $parametros;
   }
 
   private function leArqCompra($ftpdata) {

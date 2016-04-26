@@ -1,3 +1,0 @@
-id_compra:1;pago:S;status_pagamento:Pagamento efetuado;numero_cartao:4916409026247799;valor_parcela:10;data_pagamento:2016-04-25;valor_total:10
-id_compra:1;pago:S;status_pagamento:Pagamento efetuado;numero_cartao:4916409026247799;valor_parcela:10;data_pagamento:2016-04-25;valor_total:10
-id_compra:1;pago:N;status_pagamento:Pagamento não realizado. Verifique junto a sua operadora.;numero_cartao:4916409026247799;valor_parcela:10;data_pagamento:2016-04-25;valor_total:10

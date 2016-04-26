@@ -1,1 +1,0 @@
-id_compra:789;pago:S;status_pagamento:Pagamento efetuado;cod_barras_boleto:34192.01755 03456.789928 92823.897704 1 3681640000;valor_parcela:20;data_pagamento:2016-04-25;valor_total:20
