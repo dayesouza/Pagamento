@@ -53,12 +53,7 @@ public function conecta($conexao = null) {
 
   public function atualizaTabela($texto_query) {
     $rs = mysqli_query($this->my_conexao, $texto_query);
-    if ($rs > 0) {
-      return $rs;
-    }
-    else {
-      return $rs;
-    }
+    return $rs;
   }
 
 }
